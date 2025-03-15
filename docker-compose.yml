@@ -1,0 +1,36 @@
+version: "3.9"
+
+networks:
+  intranet:
+    external: true
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+      - "4455:4455"
+      - "4433:4433"
+      - "9090:9090"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt/live/id-test.dev-steamify.io/fullchain.pem:/etc/letsencrypt/live/id-test.dev-steamify.io/fullchain.pem:ro
+      - /etc/letsencrypt/live/id-test.dev-steamify.io/privkey.pem:/etc/letsencrypt/live/id-test.dev-steamify.io/privkey.pem:ro
+    restart: always
+    networks:
+      - intranet
+
+  kratos-selfservice-ui-node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: 
+      - .env
+    networks:
+      - intranet
+    expose:
+      - 3000
+    restart: always
+
