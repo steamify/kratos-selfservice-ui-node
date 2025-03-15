@@ -19,6 +19,7 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const config = {
+  level: "debug",
   format: winston.format.combine(winston.format.timestamp(), format),
   transports: [new winston.transports.Console()],
 }
