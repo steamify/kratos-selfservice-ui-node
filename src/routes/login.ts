@@ -84,7 +84,12 @@ export const createLoginRoute: RouteCreator =
         .then(({ headers, data: verificationFlow }) => {
           // we need the csrf cookie from the verification flow
           if (headers["set-cookie"]) {
-            res.setHeader("set-cookie", headers["set-cookie"])
+            console.log("headers", headers)
+            try {
+              res.setHeader("set-cookie", headers["set-cookie"])
+            } catch (error) {
+              console.log("set-cookie error", error)
+            }
           }
           // encode the verification flow id in the query parameters
           const verificationParameters = new URLSearchParams({
