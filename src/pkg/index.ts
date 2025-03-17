@@ -85,6 +85,8 @@ export const redirectOnSoftError =
   (res: Response, next: NextFunction, redirectTo: string) =>
     (err: AxiosError) => {
       logger.error("redirectOnSoftError error", { error: err })
+      logger.error("redirectOnSoftError error.response", { error: err.response })
+      logger.error("redirectOnSoftError response", { response: res })
 
       if (!err.response) {
         next(err)
