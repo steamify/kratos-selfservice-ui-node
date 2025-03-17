@@ -7,14 +7,14 @@ let format: winston.Logform.Format = winston.format.json()
 if (process.env.NODE_ENV === "development") {
   format = winston.format.combine(
     winston.format.simple(),
-    winston.format.colorize({
-      all: true,
-      colors: {
-        info: "blue",
-        error: "red",
-        warn: "yellow",
-      },
-    }),
+    // winston.format.colorize({
+    //   all: true,
+    //   colors: {
+    //     info: "blue",
+    //     error: "red",
+    //     warn: "yellow",
+    //   },
+    // }),
   )
 }
 
